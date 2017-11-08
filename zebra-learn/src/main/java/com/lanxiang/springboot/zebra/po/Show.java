@@ -9,6 +9,8 @@ public class Show {
 
     private Integer id;
 
+    private Long uid;
+
     private Long showNum;
 
     private Date showDate;
@@ -21,6 +23,14 @@ public class Show {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Long getUid() {
+        return uid;
+    }
+
+    public void setUid(Long uid) {
+        this.uid = uid;
     }
 
     public Long getShowNum() {

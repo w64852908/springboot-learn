@@ -5,6 +5,7 @@
 <!--auto generated Code-->
     <resultMap id="AllColumnMap" type="com.lanxiang.springboot.zebra.po.Show">
         <result column="id" property="id"/>
+        <result column="uid" property="uid"/>
         <result column="show_num" property="showNum"/>
         <result column="show_date" property="showDate"/>
         <result column="created" property="created"/>
@@ -13,6 +14,7 @@
 <!--auto generated Code-->
     <sql id="all_column">
         id,
+        uid,
         show_num,
         show_date,
         created
@@ -20,9 +22,10 @@
 
 <!--auto generated Code-->
     <insert id="insert">
-        INSERT INTO `show`
+        INSERT INTO show
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="show.id != null"> id, </if>
+            <if test="show.uid != null"> uid, </if>
             <if test="show.showNum != null"> show_num, </if>
             <if test="show.showDate != null"> show_date, </if>
             created
@@ -30,6 +33,7 @@
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="show.id != null"> #{show.id}, </if>
+            <if test="show.uid != null"> #{show.uid}, </if>
             <if test="show.showNum != null"> #{show.showNum}, </if>
             <if test="show.showDate != null"> #{show.showDate}, </if>
             NOW()
@@ -38,12 +42,13 @@
 
 <!--auto generated Code-->
     <insert id="insertList">
-        INSERT INTO `show` (
+        INSERT INTO show(
         <include refid="all_column"/>
         )VALUES
         <foreach collection="shows" item="show" index="index" separator=",">
             (
             #{show.id},
+            #{show.uid},
             #{show.showNum},
             #{show.showDate},
             NOW()
@@ -53,9 +58,10 @@
 
 <!--auto generated Code-->
     <update id="update">
-        UPDATE `show`
+        UPDATE show
         <set>
             <if test="show.id != null"> id = #{show.id}, </if>
+            <if test="show.uid != null"> uid = #{show.uid}, </if>
             <if test="show.showNum != null"> show_num = #{show.showNum}, </if>
             <if test="show.showDate != null"> show_date = #{show.showDate}, </if>
             <if test="show.created != null"> created = #{show.created} </if>
@@ -66,9 +72,10 @@
 <!--auto generated Code-->
     <select id="select" resultMap="AllColumnMap">
         SELECT <include refid="all_column"/>
-        FROM `show`
+        FROM show
         <where>
             <if test="show.id != null"> AND id = #{show.id} </if>
+            <if test="show.uid != null"> AND uid = #{show.uid} </if>
             <if test="show.showNum != null"> AND show_num = #{show.showNum} </if>
             <if test="show.showDate != null"> AND show_date = #{show.showDate} </if>
             <if test="show.created != null"> AND created = #{show.created} </if>

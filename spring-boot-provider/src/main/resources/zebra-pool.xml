@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--<import resource="classpath:/otherSpring.xml"/>-->
+
+    <bean primary="true" id="zebraDs0" class="com.dianping.zebra.single.jdbc.SingleDataSource" init-method="init" destroy-method="close">
+        <!--必填，填写atlas的地址-->
+        <property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/lanxiang?useUnicode=true&amp;connectTimeout=6000&amp;socketTimeout=12000&amp;characterEncoding=UTF-8"/>
+        <!--必填，填写atlas的用户名-->
+        <property name="user" value="root" />
+        <!--必填，填写atlas的密码-->
+        <property name="password" value="123456" />
+        <!-- 选填，默认值为"c3p0",还支持"tomcat-jdbc"或者"druid"-->
+        <property name="driverClass" value="com.mysql.jdbc.Driver" />
+
+        <!-- 选配。指定底层使用的连接池类型，支持"c3p0","tomcat-jdbc","druid","hikaricp","dbcp2"和"dbcp"，推荐使用"tomcat-jdbc"，默认值为"c3p0" -->
+        <property name="poolType" value="druid" />
+        <!-- 选配。指定连接池的最小连接数，默认值是5。 -->
+        <property name="minPoolSize" value="5" />
+        <!-- 选配。指定连接池的最大连接数，默认值是20。 -->
+        <property name="maxPoolSize" value="20" />
+        <!-- 选配。指定连接池的初始化连接数，默认值是5。 -->
+        <property name="initialPoolSize" value="5" />
+        <!-- 选配。指定连接池的获取连接的超时时间，默认值是1000。 -->
+        <property name="checkoutTimeout" value="1000" />
+
+        <!--以下配置可以选配-->
+        <!--定义所有检测连接有效性的测试所执行的测试语句。Default: null-->
+        <property name="preferredTestQuery" value="SELECT 1" />
+
+        <!--以下配置 只有poolType为c3p0时生效 -->
+        <!--连接池内连接最大空闲时间。若为0则永不丢弃。Default: 0 -->
+        <property name="maxIdleTime" value="1800" />
+        <!--每60秒检查所有连接池中的空闲连接。Default: 0 -->
+        <property name="idleConnectionTestPeriod" value="60" />
+        <!--定义在从数据库获取新连接失败后重复尝试的次数。Default: 30 -->
+        <property name="acquireRetryAttempts" value="3" />
+        <!--重新获取连接中间隔时间，单位毫秒。Default: 1000 -->
+        <property name="acquireRetryDelay" value="300" />
+        <!--JDBC的标准参数，用以控制数据源内加载的PreparedStatements数量。但由于预缓存的statements
+        属于单个connection而不是整个连接池。所以设置这个参数需要考虑到多方面的因素。
+        如果maxStatements与maxStatementsPerConnection均为0，则缓存被关闭。Default: 0-->
+        <property name="maxStatements" value="0" />
+        <!--定义了连接池内单个连接所拥有的最大缓存statements数。Default: 0 -->
+        <property name="maxStatementsPerConnection" value="100" />
+        <!--c3p0是异步操作的，缓慢的JDBC操作通过帮助进程完成。扩展这些操作可以有效的提升性能
+        通过多线程实现多个操作同时被执行。Default: 3-->
+        <property name="numHelperThreads" value="6" />
+        <!--可能对那些面临无限挂起的任务或者出现明显的死锁信息的用户有帮助-->
+        <property name="maxAdministrativeTaskTime" value="5" />
+
+    </bean>
+
+    <bean id="dataSource" class="com.dianping.zebra.shard.jdbc.ShardDataSource" init-method="init">
+        <property name="dataSourcePool">
+            <map>
+                <entry key="id0" value-ref="zebraDs0"/>
+            </map>
+        </property>
+        <property name="routerFactory">
+            <bean class="com.dianping.zebra.shard.router.builder.XmlResourceRouterBuilder">
+                <constructor-arg value="spring/shard/router-local-rule.xml"/>
+            </bean>
+        </property>
+        <!--业务自行调整并发查询的线程池参数 -->
+        <property name="parallelCorePoolSize" value="16" />
+        <!--业务自行调整并发查询的线程池参数 -->
+        <property name="parallelMaxPoolSize" value="32" />
+        <!--业务自行调整并发查询的线程池参数 -->
+        <property name="parallelWorkQueueSize" value="500" />
+        <!--业务自行调整逻辑SQL在线程池里面的超时时间，可以在beta环境设置的大一点 -->
+        <property name="parallelExecuteTimeOut" value="3000" />
+    </bean>
+
+</beans>
