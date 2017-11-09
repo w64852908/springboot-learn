@@ -23,7 +23,7 @@
     </settings>
 
     <typeAliases>
-        <package name="com.lanxiang.springboot.zebra.po"/>
+        <package name="com.lanxiang.springboot.zebra"/>
     </typeAliases>
 
     <mappers>

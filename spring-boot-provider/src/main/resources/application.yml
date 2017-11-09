@@ -1,24 +1,3 @@
-spring:
-#    datasource:
-#        name: test
-#        url: jdbc:mysql://127.0.0.1:3306/lanxiang?useUnicode=true&amp;connectTimeout=6000&amp;socketTimeout=12000&amp;characterEncoding=UTF-8
-#        username: root
-#        password: 123456
-#        # 使用druid数据源
-#        type: com.dianping.zebra.group.jdbc.GroupDataSource
-#        driver-class-name: com.mysql.jdbc.Driver
-#        filters: stat
-#        maxActive: 16
-#        initialSize: 4
-#        maxWait: 3000
-#        minIdle: 4
-#        timeBetweenEvictionRunsMillis: 60000
-#        minEvictableIdleTimeMillis: 300000
-#        validationQuery: select 1
-#        testWhileIdle: true
-#        testOnBorrow: false
-#        dbc_connectionInitSqls: SET NAMES utf8mb
-
 mybatis:
 #    type-aliases-package: com.lanxiang.springboot.zebra
     configLocation: classpath:/mybatis-config.xml

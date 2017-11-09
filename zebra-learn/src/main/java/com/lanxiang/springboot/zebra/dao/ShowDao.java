@@ -2,15 +2,13 @@ package com.lanxiang.springboot.zebra.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.lanxiang.springboot.zebra.po.Show;
 
 
-@Component
-@Mapper
+@Repository("showDao")
 public interface ShowDao {
 
     int insert(@Param("show") Show show);
