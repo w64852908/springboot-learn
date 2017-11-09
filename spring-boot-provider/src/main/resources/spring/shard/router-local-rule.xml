@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <router-rule>
     <table-shard-rule table="show" global="false" generatedPK="id">
-        <shard-dimension dbRule="#show_date# == null ? SKIP : 0"
-                         dbIndexes="show_date_one"
-                         tbRule="\'#show_date.replaceAll(\'_\',\'\')#"
-                         tbSuffix="alldb:[]"
-                         isMaster="false">
+        <shard-dimension dbRule="#id# % 2"
+                         dbIndexes="id0,id0"
+                         tbRule="#id#.intValue() % 2"
+                         tbSuffix="alldb:[0,1]"
+                         isMaster="true">
         </shard-dimension>
     </table-shard-rule>
 </router-rule>

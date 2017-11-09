@@ -22,6 +22,7 @@ public class ZebraTest extends BaseTest {
     @Test
     public void testInsert() {
         Show show = new Show();
+        show.setId(333);
         show.setShowNum(1L);
         show.setShowDate(new DateTime().minusMinutes(1).toDate());
         showService.insert(show);

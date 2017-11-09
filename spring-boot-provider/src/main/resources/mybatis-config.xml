@@ -22,4 +22,12 @@
         <setting name='localCacheScope' value='STATEMENT'/>
     </settings>
 
+    <typeAliases>
+        <package name="com.lanxiang.springboot.zebra.po"/>
+    </typeAliases>
+
+    <mappers>
+        <mapper resource="mapper/ShowDao.xml"/>
+    </mappers>
+
 </configuration>

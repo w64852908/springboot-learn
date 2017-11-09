@@ -20,6 +20,6 @@ spring:
 #        dbc_connectionInitSqls: SET NAMES utf8mb
 
 mybatis:
-    type-aliases-package: com.lanxiang.springboot.zebra
+#    type-aliases-package: com.lanxiang.springboot.zebra
     configLocation: classpath:/mybatis-config.xml
     mapperLocations: classpath:mapper/*.xml
