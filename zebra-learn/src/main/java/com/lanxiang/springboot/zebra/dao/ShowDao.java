@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.lanxiang.springboot.zebra.po.Show;
 
 
-@Repository("showDao")
+@Repository
 public interface ShowDao {
 
     int insert(@Param("show") Show show);

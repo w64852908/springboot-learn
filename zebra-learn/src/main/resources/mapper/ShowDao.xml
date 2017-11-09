@@ -4,10 +4,10 @@
 
 <!--auto generated Code-->
     <resultMap id="AllColumnMap" type="com.lanxiang.springboot.zebra.po.Show">
-        <result column="id" property="id"/>
-        <result column="show_num" property="showNum"/>
-        <result column="show_date" property="showDate"/>
-        <result column="created" property="created"/>
+        <result column="id" property="id" />
+        <result column="show_num" property="showNum" />
+        <result column="show_date" property="showDate" />
+        <result column="created" property="created" />
     </resultMap>
 
 <!--auto generated Code-->
@@ -19,34 +19,22 @@
     </sql>
 
 <!--auto generated Code-->
-    <insert id="insert">
+    <insert id="insert" parameterType="com.lanxiang.springboot.zebra.po.Show">
         INSERT INTO `show`
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="show.id != null"> id, </if>
-            <if test="show.showNum != null"> show_num, </if>
-            <if test="show.showDate != null"> show_date, </if>
-            <if test="show.created != null"> created, </if>
-        </trim>
+        (show_num,show_date)
         VALUES
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="show.id != null"> #{show.id}, </if>
-            <if test="show.showNum != null"> #{show.showNum}, </if>
-            <if test="show.showDate != null"> #{show.showDate}, </if>
-            <if test="show.created != null"> #{show.created}, </if>
-        </trim>
+        (#{show.showNum}, #{show.showDate})
     </insert>
 
 <!--auto generated Code-->
     <insert id="insertList">
         INSERT INTO `show` (
-        <include refid="all_column"/>
+          show_num,show_date
         )VALUES
         <foreach collection="shows" item="show" index="index" separator=",">
             (
-            #{show.id},
             #{show.showNum},
-            #{show.showDate},
-            #{show.created}
+            #{show.showDate}
             )
         </foreach>
     </insert>
@@ -73,7 +61,7 @@
             <if test="show.showDate != null"> AND show_date = #{show.showDate} </if>
             <if test="show.created != null"> AND created = #{show.created} </if>
         </where>
-        LIMIT 10000
+        LIMIT 10000 
     </select>
 
 <!--auto generated Code-->

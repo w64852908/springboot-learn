@@ -11,9 +11,9 @@ import org.joda.time.format.DateTimeFormatter;
  */
 public class DateUtils {
 
-    private static final DateTimeFormatter showDateFormatter = DateTimeFormat.forPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter showDateFormatter = DateTimeFormat.forPattern("yyyyMMdd");
 
-    private static final SimpleDateFormat simpleDateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+    private static final SimpleDateFormat simpleDateFormatter = new SimpleDateFormat("yyyyMMdd");
 
     public static String date2ShowDate(Date date) {
         return simpleDateFormatter.format(date);

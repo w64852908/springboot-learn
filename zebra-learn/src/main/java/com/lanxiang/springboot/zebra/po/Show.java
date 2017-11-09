@@ -13,7 +13,7 @@ public class Show {
 
     private Long showNum;
 
-    private String showDate;
+    private Integer showDate;
 
     private Date created;
 
@@ -33,12 +33,16 @@ public class Show {
         this.showNum = showNum;
     }
 
-    public String getShowDate() {
+    public Integer getShowDate() {
         return showDate;
     }
 
+    public void setShowDate(Integer showDate) {
+        this.showDate = showDate;
+    }
+
     public void setShowDate(Date showDate) {
-        this.showDate = DateUtils.date2ShowDate(showDate);
+        this.showDate = Integer.parseInt(DateUtils.date2ShowDate(showDate));
     }
 
     public Date getCreated() {

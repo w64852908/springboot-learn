@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <router-rule>
     <table-shard-rule table="show" global="false" generatedPK="id">
-        <shard-dimension dbRule="#id# % 2"
-                         dbIndexes="id0,id0"
-                         tbRule="#id#.intValue() % 2"
-                         tbSuffix="alldb:[0,1]"
+        <shard-dimension dbRule="(#show_num#.intValue() % 8).intdiv(2)"
+                         dbIndexes="id[0-3]"
+                         tbRule="#show_date#-20171109"
+                         tbSuffix="alldb:[20171109,20991231]"
                          isMaster="true">
         </shard-dimension>
     </table-shard-rule>
