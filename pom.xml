@@ -13,12 +13,13 @@
         <spring-boot.version>1.5.4.RELEASE</spring-boot.version>
         <spring.version>4.3.9.RELEASE</spring.version>
         <mybatis.spring-boot.version>1.1.1</mybatis.spring-boot.version>
-        <druid.version>1.0.27</druid.version>
+        <!--<druid.version>1.0.27</druid.version>-->
         <mysql.connector.version>5.1.38</mysql.connector.version>
         <mybatis.version>3.4.0</mybatis.version>
         <junit.version>4.12</junit.version>
         <joda.version>2.9.9</joda.version>
         <zebra.version>2.9.6</zebra.version>
+        <fastjson.version>1.2.29</fastjson.version>
     </properties>
 
 
@@ -66,11 +67,11 @@
                 <version>${mybatis.spring-boot.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>druid</artifactId>
-                <version>${druid.version}</version>
-            </dependency>
+            <!--<dependency>-->
+                <!--<groupId>com.alibaba</groupId>-->
+                <!--<artifactId>druid</artifactId>-->
+                <!--<version>${druid.version}</version>-->
+            <!--</dependency>-->
 
             <dependency>
                 <groupId>mysql</groupId>
@@ -120,6 +121,12 @@
                 <groupId>com.dianping.zebra</groupId>
                 <artifactId>zebra-ds-monitor-client</artifactId>
                 <version>${zebra.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
             </dependency>
 
         </dependencies>

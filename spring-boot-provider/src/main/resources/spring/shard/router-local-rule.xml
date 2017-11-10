@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <router-rule>
     <table-shard-rule table="show" global="false" generatedPK="id">
-        <shard-dimension dbRule="(#show_num#.intValue() % 8).intdiv(2)"
+        <shard-dimension dbRule="(#show_date#.intValue() % 8).intdiv(8)"
                          dbIndexes="id[0-3]"
                          tbRule="#show_date#-20171109"
                          tbSuffix="alldb:[20171109,20991231]"

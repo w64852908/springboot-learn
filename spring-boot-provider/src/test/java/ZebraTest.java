@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
+import com.alibaba.fastjson.JSON;
 import com.lanxiang.springboot.zebra.po.Show;
 import com.lanxiang.springboot.zebra.service.ShowService;
 
@@ -51,7 +52,7 @@ public class ZebraTest extends BaseTest {
 
     @Test
     public void testManyInsert() {
-        int end = 10000;
+        int end = 1000000;
         Random random = new Random();
         for (int i = 1; i <= end; i++) {
             Show show = new Show();
@@ -60,5 +61,20 @@ public class ZebraTest extends BaseTest {
             showService.insert(show);
             System.out.println("insert progress : " + i + "/" + end);
         }
+    }
+
+    @Test
+    public void testSelectById() {
+        int id = 1;
+        Show show = showService.selectById(id);
+        System.out.println(JSON.toJSONString(show));
+    }
+
+    @Test
+    public void testSelectByIdAndShowDate() {
+        int id = 5;
+        int showDate = 20171124;
+        Show show = showService.selectByIdAndShowDate(id, showDate);
+        System.out.println(JSON.toJSONString(show));
     }
 }

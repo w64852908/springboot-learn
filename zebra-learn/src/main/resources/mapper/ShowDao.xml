@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lanxiang.springboot.zebra.dao.ShowDao">
 
-<!--auto generated Code-->
+    <!--auto generated Code-->
     <resultMap id="AllColumnMap" type="com.lanxiang.springboot.zebra.po.Show">
-        <result column="id" property="id" />
-        <result column="show_num" property="showNum" />
-        <result column="show_date" property="showDate" />
-        <result column="created" property="created" />
+        <result column="id" property="id"/>
+        <result column="show_num" property="showNum"/>
+        <result column="show_date" property="showDate"/>
+        <result column="created" property="created"/>
     </resultMap>
 
-<!--auto generated Code-->
+    <!--auto generated Code-->
     <sql id="all_column">
         id,
         show_num,
@@ -18,7 +18,7 @@
         created
     </sql>
 
-<!--auto generated Code-->
+    <!--auto generated Code-->
     <insert id="insert" parameterType="com.lanxiang.springboot.zebra.po.Show">
         INSERT INTO `show`
         (show_num,show_date)
@@ -26,10 +26,10 @@
         (#{show.showNum}, #{show.showDate})
     </insert>
 
-<!--auto generated Code-->
+    <!--auto generated Code-->
     <insert id="insertList">
         INSERT INTO `show` (
-          show_num,show_date
+        show_num,show_date
         )VALUES
         <foreach collection="shows" item="show" index="index" separator=",">
             (
@@ -39,32 +39,49 @@
         </foreach>
     </insert>
 
-<!--auto generated Code-->
+    <!--auto generated Code-->
     <update id="update">
         UPDATE `show`
         <set>
-            <if test="show.id != null"> id = #{show.id}, </if>
-            <if test="show.showNum != null"> show_num = #{show.showNum}, </if>
-            <if test="show.showDate != null"> show_date = #{show.showDate}, </if>
-            <if test="show.created != null"> created = #{show.created} </if>
+            <if test="show.id != null">id = #{show.id},</if>
+            <if test="show.showNum != null">show_num = #{show.showNum},</if>
+            <if test="show.showDate != null">show_date = #{show.showDate},</if>
+            <if test="show.created != null">created = #{show.created}</if>
         </set>
-         WHERE id = #{show.id}
+        WHERE id = #{show.id}
     </update>
 
-<!--auto generated Code-->
-    <select id="select" resultMap="AllColumnMap">
-        SELECT <include refid="all_column"/>
+    <!--auto generated Code-->
+    <!--<select id="select" resultMap="AllColumnMap">-->
+    <!--SELECT-->
+    <!--<include refid="all_column"/>-->
+    <!--FROM `show`-->
+    <!--<where>-->
+    <!--<if test="show.id != null">AND id = #{show.id}</if>-->
+    <!--<if test="show.showNum != null">AND show_num = #{show.showNum}</if>-->
+    <!--<if test="show.showDate != null">AND show_date = #{show.showDate}</if>-->
+    <!--<if test="show.created != null">AND created = #{show.created}</if>-->
+    <!--</where>-->
+    <!--LIMIT 10000-->
+    <!--</select>-->
+
+    <select id="selectById" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
         FROM `show`
-        <where>
-            <if test="show.id != null"> AND id = #{show.id} </if>
-            <if test="show.showNum != null"> AND show_num = #{show.showNum} </if>
-            <if test="show.showDate != null"> AND show_date = #{show.showDate} </if>
-            <if test="show.created != null"> AND created = #{show.created} </if>
-        </where>
-        LIMIT 10000 
+        WHERE id = #{id}
+        LIMIT 1
     </select>
 
-<!--auto generated Code-->
+    <select id="selectByIdAndShowDate" resultMap="AllColumnMap">
+        SELECT
+        <include refid="all_column"/>
+        FROM `show`
+        WHERE id = #{id} AND show_date = #{showDate}
+        LIMIT 1
+    </select>
+
+    <!--auto generated Code-->
     <delete id="delete">
         DELETE FROM `show` where id = #{show.id}
     </delete>

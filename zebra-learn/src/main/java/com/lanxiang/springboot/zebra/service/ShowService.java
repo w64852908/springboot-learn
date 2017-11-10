@@ -15,19 +15,23 @@ public class ShowService {
     @Resource
     private ShowDao showDao;
 
-    public int insert(Show show){
+    public int insert(Show show) {
         return showDao.insert(show);
     }
 
-    public int insertList(List< Show> shows){
+    public int insertList(List<Show> shows) {
         return showDao.insertList(shows);
     }
 
-    public List<Show> select(Show show){
-        return showDao.select(show);
+    public Show selectById(int id) {
+        return showDao.selectById(id);
     }
 
-    public int update(Show show){
+    public Show selectByIdAndShowDate(int id, int showDate) {
+        return showDao.selectByIdAndShowDate(id, showDate);
+    }
+
+    public int update(Show show) {
         return showDao.update(show);
     }
 

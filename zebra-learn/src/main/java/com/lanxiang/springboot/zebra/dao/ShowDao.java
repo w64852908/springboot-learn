@@ -13,9 +13,11 @@ public interface ShowDao {
 
     int insert(@Param("show") Show show);
 
-    int insertList(@Param("shows") List< Show> show);
+    int insertList(@Param("shows") List<Show> show);
 
-    List<Show> select(@Param("show") Show show);
+    Show selectById(@Param("id") Integer id);
+
+    Show selectByIdAndShowDate(@Param("id") Integer id, @Param("showDate") Integer showDate);
 
     int update(@Param("show") Show show);
 
