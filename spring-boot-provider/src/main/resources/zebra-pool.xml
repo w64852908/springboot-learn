@@ -6,13 +6,7 @@
                 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <!--<import resource="classpath:/otherSpring.xml"/>-->
 
-    <bean primary="true" id="zebraDs0" class="com.dianping.zebra.single.jdbc.SingleDataSource" init-method="init" destroy-method="close">
-        <!--必填，填写atlas的地址-->
-        <property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/lanxiang?useUnicode=true&amp;connectTimeout=6000&amp;socketTimeout=12000&amp;characterEncoding=UTF-8"/>
-        <!--必填，填写atlas的用户名-->
-        <property name="user" value="root" />
-        <!--必填，填写atlas的密码-->
-        <property name="password" value="123456" />
+    <bean id="abstractDs" abstract="true" class="com.dianping.zebra.single.jdbc.SingleDataSource" init-method="init" destroy-method="close">
         <!-- 选填，默认值为"c3p0",还支持"tomcat-jdbc"或者"druid"-->
         <property name="driverClass" value="com.mysql.jdbc.Driver" />
 
@@ -52,6 +46,15 @@
         <!--可能对那些面临无限挂起的任务或者出现明显的死锁信息的用户有帮助-->
         <property name="maxAdministrativeTaskTime" value="5" />
 
+    </bean>
+
+    <bean id="zebraDs0" parent="abstractDs" init-method="init" primary="true" destroy-method="close">
+        <!--必填，填写atlas的地址-->
+        <property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/lanxiang?useUnicode=true&amp;connectTimeout=6000&amp;socketTimeout=12000&amp;characterEncoding=UTF-8"/>
+        <!--必填，填写atlas的用户名-->
+        <property name="user" value="root" />
+        <!--必填，填写atlas的密码-->
+        <property name="password" value="123456" />
     </bean>
 
     <bean id="dataSource" class="com.dianping.zebra.shard.jdbc.ShardDataSource" init-method="init">
