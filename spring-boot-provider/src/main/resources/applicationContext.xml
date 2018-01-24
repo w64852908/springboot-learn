@@ -7,5 +7,6 @@
     <!--<import resource="classpath:/otherSpring.xml"/>-->
 
     <import resource="classpath:zebra-pool.xml"/>
+    <import resource="classpath:spring-aop.xml"/>
 
 </beans>

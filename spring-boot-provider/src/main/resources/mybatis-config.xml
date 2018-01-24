@@ -28,6 +28,7 @@
 
     <mappers>
         <mapper resource="mapper/ShowDao.xml"/>
+        <mapper resource="mapper/SelllogDao.xml"/>
     </mappers>
 
 </configuration>

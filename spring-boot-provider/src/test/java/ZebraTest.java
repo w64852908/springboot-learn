@@ -52,12 +52,12 @@ public class ZebraTest extends BaseTest {
 
     @Test
     public void testManyInsert() {
-        int end = 1000000;
+        int end = 1000;
         Random random = new Random();
         for (int i = 1; i <= end; i++) {
             Show show = new Show();
             show.setShowNum((long) i);
-            show.setShowDate(new DateTime().plusDays(random.nextInt(30)).toDate());
+            show.setShowDate(new DateTime().plusDays(random.nextInt(3)).toDate());
             showService.insert(show);
             System.out.println("insert progress : " + i + "/" + end);
         }
@@ -73,7 +73,7 @@ public class ZebraTest extends BaseTest {
     @Test
     public void testSelectByIdAndShowDate() {
         int id = 5;
-        int showDate = 20171124;
+        int showDate = 20171209;
         Show show = showService.selectByIdAndShowDate(id, showDate);
         System.out.println(JSON.toJSONString(show));
     }
