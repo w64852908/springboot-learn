@@ -52,7 +52,7 @@
         SELECT
         <include refid="all_column"/>
         FROM record_log
-        WHERE id = #{id} AND create_date = #{createDate}
+        WHERE id = #{id} and create_date = #{createDate}
         LIMIT 1
     </select>
 </mapper>

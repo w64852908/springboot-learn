@@ -1,6 +1,8 @@
 package com.lanxiang.springboot.zebra.service;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -21,5 +23,17 @@ public class SelllogService {
 
     public Selllog queryByIdAndCreateDate(Long id, Date createDate) {
         return selllogDao.selectByIdAndCreateDate(id, createDate);
+    }
+
+    public Selllog queryByIdAndCreateDateFromProvider(Long id, Date createDate) {
+        Map<String, Object> param = new HashMap<>();
+        param.put("id", id);
+        param.put("createDate", createDate);
+        return selllogDao.selectByProvider(param);
+    }
+
+    public Long insertByAnnotation(Selllog selllog) {
+        selllogDao.insertByAnnotate(selllog);
+        return selllog.getId();
     }
 }

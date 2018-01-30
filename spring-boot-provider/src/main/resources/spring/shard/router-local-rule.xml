@@ -2,18 +2,28 @@
 <router-rule>
     <table-shard-rule table="show" global="false" generatedPK="id">
         <shard-dimension dbRule="0"
-                         dbIndexes="id[0]"
+                         dbIndexes="id[0-0]"
                          tbRule="#show_date#-20171109"
                          tbSuffix="alldb:[20171109,20991231]"
                          isMaster="true">
         </shard-dimension>
     </table-shard-rule>
 
+
+    <!--<table-shard-rule table="record_log" global="false" generatedPK="id">-->
+        <!--<shard-dimension dbRule="0"-->
+                         <!--dbIndexes="id[0-0]"-->
+                         <!--tbRule='def division = 20180124; def createDate = Integer.valueOf((#create_date#).format("yyyyMMdd")); return createDate >= division ? createDate - division + 1 : 0;'-->
+                         <!--tbSuffix="id0:[$]&amp;alldb:[20180124,20301231]"-->
+                         <!--isMaster="true">-->
+        <!--</shard-dimension>-->
+    <!--</table-shard-rule>-->
+
     <table-shard-rule table="record_log" global="false" generatedPK="id">
         <shard-dimension dbRule="0"
                          dbIndexes="id[0-0]"
-                         tbRule='def division = 20180124; def createDate = Integer.valueOf((#create_date#).format("yyyyMMdd")); return createDate >= division ? createDate - division : 811108;'
-                         tbSuffix="alldb:[20180124,20991231]&amp;id0:[$]"
+                         tbRule='def var = #type#; return 0'
+                         tbSuffix="id0:[$]"
                          isMaster="true">
         </shard-dimension>
     </table-shard-rule>

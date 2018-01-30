@@ -17,4 +17,8 @@ public class AOPTest extends BaseTest {
         String res = lockSeatService.lockSeat();
         System.out.println(res);
     }
+
+    @Test
+    public void test2() {
+    }
 }

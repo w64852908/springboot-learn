@@ -1,3 +1,4 @@
+import java.util.Date;
 import java.util.Random;
 
 import javax.annotation.Resource;
@@ -21,7 +22,7 @@ public class SelllogTest extends BaseTest {
 
     @Test
     public void testInsert() {
-        int total = 10000;
+        int total = 100;
         for (int i = 0; i < total; i++) {
             Selllog selllog = new Selllog();
             selllog.setType(1);
@@ -40,14 +41,50 @@ public class SelllogTest extends BaseTest {
         }
     }
 
+    @Test
+    public void testInsertForDateData() {
+        Selllog selllog = new Selllog();
+        selllog.setType(1);
+        selllog.setOrderId(random.nextInt(10000000));
+        selllog.setCinemaId(random.nextInt(10000));
+        selllog.setSource(random.nextInt(100));
+        String date = "2017-01-01";
+        DateTime createdDate = DateTime.parse(date);
+        selllog.setCreateDate(createdDate.toDate());
+        selllog.setCreateTime(new Date());
+        selllogService.insert(selllog);
+    }
+
+    @Test
+    public void testInsertByAnnotation() {
+        Selllog selllog = new Selllog();
+        selllog.setType(1);
+        selllog.setOrderId(random.nextInt(10000000));
+        selllog.setCinemaId(random.nextInt(10000));
+        selllog.setSource(random.nextInt(100));
+        selllog.setCreateDate(new Date());
+        selllog.setCreateTime(new Date());
+        Long id = selllogService.insertByAnnotation(selllog);
+        System.out.println("==============================" + id);
+    }
 
     @Test
     public void testQuery() {
-        DateTime dateTime = new DateTime(2017, 10, 26, 0, 0, 0);
+        DateTime dateTime = new DateTime(2017, 12, 6, 0, 0, 0);
         Selllog log = selllogService.queryByIdAndCreateDate(811L, dateTime.toDate());
         System.out.println(JSON.toJSONString(log));
-        dateTime = new DateTime(2018, 1, 24, 0, 0, 0);
+        dateTime = new DateTime(2018, 1, 28, 0, 0, 0);
         log = selllogService.queryByIdAndCreateDate(10L, dateTime.toDate());
+        System.out.println(JSON.toJSONString(log));
+    }
+
+    @Test
+    public void testQueryByProvider() {
+        DateTime dateTime = new DateTime(2017, 12, 20, 0, 0, 0);
+        Selllog log = selllogService.queryByIdAndCreateDateFromProvider(811L, dateTime.toDate());
+        System.out.println(JSON.toJSONString(log));
+        dateTime = new DateTime(2018, 1, 24, 0, 0, 0);
+        log = selllogService.queryByIdAndCreateDateFromProvider(10L, dateTime.toDate());
         System.out.println(JSON.toJSONString(log));
     }
 }
