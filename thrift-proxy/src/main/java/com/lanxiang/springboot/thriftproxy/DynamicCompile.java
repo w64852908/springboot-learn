@@ -73,7 +73,7 @@ public class DynamicCompile {
     @Test
     public void invokeClass() throws Exception {
 
-        String fullName = "com.lanxiang.springboot.thriftproxy.aftergen.thrift.CinemaRelationRemoteService.java";
+        String fullName = "com.lanxiang.springboot.thriftproxy.aftergen.thrift.CinemaRelationRemoteService";
 
         String fileName = FILE_PATH + "/CinemaRelationRemoteService.java";
 
