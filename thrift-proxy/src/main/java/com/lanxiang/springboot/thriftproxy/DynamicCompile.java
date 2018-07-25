@@ -2,7 +2,6 @@ package com.lanxiang.springboot.thriftproxy;
 
 
 import java.io.File;
-import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,6 +11,8 @@ import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
 import org.junit.Test;
+
+import com.lanxiang.springboot.thriftproxy.onlinecase.DynamicCompileTest;
 
 /**
  * Created by lanxiang on 2018/7/24.
@@ -51,9 +52,20 @@ public class DynamicCompile {
                 "-classpath", THRIFT_JAR_PATH + ":" + SLF4j_API_PATH
         );
         JavaCompiler.CompilationTask task = compiler.getTask(null, standardJavaFileManager, null, options, null, it);
-        task.call();
 
-        invokeClass();
+        if (task.call()) {
+            try {
+                invokeClass();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                testLoadClass();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
 
         standardJavaFileManager.close();
     }
@@ -61,11 +73,29 @@ public class DynamicCompile {
     @Test
     public void invokeClass() throws Exception {
 
-        Object objService = Class.forName("com.lanxiang.springboot.thriftproxy.aftergen.thrift.Sysout").newInstance();
-        Class<?> clazz = objService.getClass();
-        Method method = clazz.getMethod("printWord", null);
+        String fullName = "com.lanxiang.springboot.thriftproxy.aftergen.thrift.CinemaRelationRemoteService.java";
 
-        method.invoke(objService, null);
+        String fileName = FILE_PATH + "/CinemaRelationRemoteService.java";
 
+        DynamicCompileTest.compileAndLoadClass(fullName, fileName);
+
+//        //方式1
+//        Class clazz = DynamicCompile.class.getClassLoader().loadClass(fullName);
+//        Object objService = clazz.newInstance();
+//
+//        //方式2
+////        Object objService = Class.forName("com.lanxiang.springboot.thriftproxy.aftergen.thrift.Sysout").newInstance();
+////        Class<?> clazz = objService.getClass();
+//        Method method = clazz.getMethod("printWord", null);
+//
+//        method.invoke(objService, null);
+
+    }
+
+    @Test
+    public void testLoadClass() throws Exception {
+        String fullName = "com.lanxiang.springboot.thriftproxy.aftergen.thrift.Sysout";
+        Class clazz = this.getClass().getClassLoader().loadClass(fullName);
+        System.out.println(clazz);
     }
 }
