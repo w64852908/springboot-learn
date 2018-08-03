@@ -22,8 +22,6 @@ public class ClassFileManager extends ForwardingJavaFileManager {
      */
     private JavaClassObject jclassObject;
 
-    private String targetClassName;
-
     /**
      * 调用父类构造器
      *
